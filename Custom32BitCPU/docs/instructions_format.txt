@@ -1,0 +1,10 @@
+32-BIT INSTRUCTION FORMAT
+
+| OPCODE (6 bits) | RD (5 bits) | RS1 (5 bits) | RS2 (5 bits) | IMM / ADDR (11 bits) |
+
+Bit Positions:
+- Bits 31 to 26 : OPCODE
+- Bits 25 to 21 : RD
+- Bits 20 to 16 : RS1
+- Bits 15 to 11 : RS2
+- Bits 10 to 0  : Immediate value or Address

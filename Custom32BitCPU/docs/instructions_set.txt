@@ -1,0 +1,25 @@
+INSTRUCTION SET (ISA)
+
+Instruction: LOAD
+Syntax: LOAD RD, IMM
+Operation: RD <- IMM
+
+Instruction: STORE
+Syntax: STORE RS, ADDR
+Operation: MEM[ADDR] <- RS
+
+Instruction: ADD
+Syntax: ADD RD, RS1, RS2
+Operation: RD <- RS1 + RS2
+
+Instruction: SUB
+Syntax: SUB RD, RS1, RS2
+Operation: RD <- RS1 - RS2
+
+Instruction: JMP
+Syntax: JMP ADDR
+Operation: PC <- ADDR
+
+Instruction: HALT
+Syntax: HALT
+Operation: Stop CPU execution

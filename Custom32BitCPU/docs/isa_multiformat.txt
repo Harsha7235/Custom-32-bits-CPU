@@ -1,0 +1,9 @@
+MULTI-FORMAT 32-BIT ISA DESIGN
+
+This processor supports multiple instruction formats
+to simplify decoding and improve architectural clarity.
+
+Supported formats:
+1. R-Type (Register to Register)
+2. I-Type (Immediate / Memory)
+3. J-Type (Control Flow)

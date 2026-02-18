@@ -1,0 +1,27 @@
+PROJECT: Custom 32-bit Secure Processor
+
+CPU TYPE:
+- Custom-designed processor
+- 32-bit architecture
+- Software-based execution with hardware modeling using Verilog
+
+REGISTERS:
+- General purpose registers: R0, R1, R2, R3, R4, R5, R6, R7
+- Register width: 32 bits
+- Special registers: PC (Program Counter), FLAGS
+
+MEMORY:
+- Code Memory: Stores instructions
+- Data Memory: Stores data values
+
+EXECUTION MODEL:
+- Fetch instruction from Code Memory using PC
+- Decode instruction fields
+- Execute instruction
+- Update PC
+- Repeat until HALT instruction
+
+SECURITY GOAL:
+- Illegal instructions should stop execution
+- Invalid jumps should be blocked
+- Code memory should not be modified during execution
