@@ -1,181 +1,396 @@
-Custom 32-Bit CPU Simulator (Mid Project)
+Nexus CPU Flow - Custom 32-Bit CPU Simulator
 
-Overview
+Project Overview
 
-The Custom 32-Bit CPU Simulator is an educational computer architecture project designed to demonstrate how a processor executes instructions, manages memory, performs arithmetic and logical operations, and interacts with hardware components. The project combines CPU simulation, instruction execution, virtual machine concepts, debugging tools, and FPGA integration into a single interactive platform.
+Nexus CPU Flow is a complete educational CPU simulation platform developed as part of the Computer Organization and Embedded Computing (EOC) project. The project demonstrates the design, implementation, visualization, and execution of a custom 32-bit processor architecture from instruction fetch to write-back.
 
-This repository contains the Mid Project implementation and ongoing development work.
+The project combines:
 
----
-
-Project Objectives
-
-- Design a custom 32-bit CPU architecture
-- Implement a custom Instruction Set Architecture (ISA)
-- Simulate Fetch–Decode–Execute cycle
-- Visualize registers, memory, and CPU operations
-- Support assembly-level programming
-- Implement Virtual Machine (VM) execution concepts
-- Integrate FPGA-style switches and LEDs
-- Provide debugging and performance analysis tools
+- Custom 32-bit CPU Architecture
+- Logisim Evolution Hardware Design
+- Custom Instruction Set Architecture (ISA)
+- Register File and Memory System
+- ALU Operations
+- ROM and RAM Integration
+- Execution Visualization
+- FPGA Simulation Interface
+- Web-Based Interactive Simulator (Base44)
 
 ---
 
-Current Features (Mid Project)
+Final Project Demo
 
-CPU Architecture
+Live Application:
 
-- 32-bit processor design
+https://nexus-cpu-flow-base44.app
+
+---
+
+Mid Project
+
+The mid-project focused on designing and validating the complete CPU datapath using Logisim Evolution.
+
+Implemented Components
+
 - Program Counter (PC)
-- Register File
+- Instruction ROM
+- Register File (16 × 32-bit Registers)
 - Arithmetic Logic Unit (ALU)
+- Multiplexers and Demultiplexers
+- RAM (4K × 32)
 - Control Unit
-- RAM Integration
-- Stack Support
+- Instruction Decoder
+- Write Enable Logic
+- Clock and Reset System
+
+Objectives
+
+- Understand CPU internals
+- Implement custom ISA
+- Execute instructions through datapath
+- Validate register transfers
+- Perform memory read/write operations
+
+---
+
+Custom 32-Bit CPU Architecture
+
+The processor follows a simplified RISC-style architecture.
+
+Datapath Flow
+
+PC
+↓
+ROM Fetch
+↓
+Instruction Decode
+↓
+Register Read
+↓
+ALU Execute
+↓
+Memory Access
+↓
+Write Back
+↓
+Next Instruction
+
+---
+
+Register File
+
+The CPU contains 16 general-purpose registers:
+
+R0 – R15
+
+Features:
+
+- 32-bit width
+- Synchronous write
+- Multiple read paths
+- Register selection through decoder logic
+
+---
+
+Memory System
+
+ROM
+
+Stores executable machine code instructions.
+
+Functions:
+
+- Instruction Fetch
+- Program Storage
+- Opcode Generation
+
+RAM
+
+4K × 32-bit memory
+
+Functions:
+
+- LOAD operations
+- STORE operations
+- Data storage
+- Runtime memory access
+
+---
 
 Instruction Set Architecture (ISA)
 
-Implemented instruction categories include:
+Arithmetic Instructions
 
-- Arithmetic Operations
-  
-  - ADD
-  - SUB
-  - MUL
-  - DIV
-  - MOD
+Instruction| Description
+ADD| Addition
+SUB| Subtraction
+MUL| Multiplication
+DIV| Division
+MOD| Modulus
 
-- Logical Operations
-  
-  - AND
-  - OR
-  - XOR
-  - NOT
+Examples:
 
-- Shift Operations
-  
-  - SHL
-  - SHR
-  - ASR
+ADD R1,R2
+SUB R3,R4
+MUL R5,R6
+DIV R7,R8
+MOD R9,R10
 
-- Comparison Operations
-  
-  - EQ
-  - GT
-  - LT
+---
 
-- Memory Operations
-  
-  - LOAD
-  - STORE
+Logical Instructions
 
-- Stack Operations
-  
-  - PUSH
-  - POP
+Instruction| Description
+AND| Logical AND
+OR| Logical OR
+XOR| Exclusive OR
+NOT| Bitwise NOT
 
-- Control Operations
-  
-  - JMP
-  - JZ
-  - CALL
-  - RET
-  - HALT
+Examples:
 
-Visualization
+AND R1,R2
+OR R3,R4
+XOR R5,R6
+NOT R7
 
-- Register monitoring
-- Memory monitoring
-- CPU execution tracking
-- Debugging support
+---
+
+Shift Instructions
+
+Instruction| Description
+SHL| Shift Left
+SHR| Shift Right
+ASR| Arithmetic Shift Right
+
+Examples:
+
+SHL R1,2
+SHR R2,1
+ASR R3,1
+
+---
+
+Comparison Instructions
+
+Instruction| Description
+EQ| Equal
+GT| Greater Than
+LT| Less Than
+
+Examples:
+
+EQ R1,R2
+GT R3,R4
+LT R5,R6
+
+---
+
+Data Transfer Instructions
+
+Instruction| Description
+MOV| Register Transfer
+LOAD| Memory Read
+STORE| Memory Write
+
+Examples:
+
+MOV R1,R2
+LOAD R1,[100]
+STORE R2,[200]
+
+---
+
+Stack Instructions
+
+Instruction| Description
+PUSH| Push Stack
+POP| Pop Stack
+
+Examples:
+
+PUSH R1
+POP R2
+
+---
+
+Control Flow Instructions
+
+Instruction| Description
+JMP| Jump
+ZJMP| Jump if Zero
+NZJMP| Jump if Not Zero
+CALL| Function Call
+RET| Return
+HALT| Stop Execution
+NOP| No Operation
+
+Examples:
+
+JMP LOOP
+ZJMP DONE
+CALL FUNC
+RET
+HALT
+
+---
+
+CPU Flags
+
+Zero Flag (ZF)
+
+Set when result equals zero.
+
+Sign Flag (SF)
+
+Set when result is negative.
+
+Overflow Flag (OF)
+
+Set when arithmetic overflow occurs.
+
+These flags are used by conditional instructions.
+
+---
+
+ALU Features
+
+Supported operations:
+
+- Add
+- Subtract
+- Multiply
+- Divide
+- Modulus
+- Shift Left
+- Shift Right
+- Arithmetic Shift Right
+- AND
+- OR
+- XOR
+- NOT
+- Comparisons
+
+---
+
+Execution Stages
+
+Fetch
+
+Instruction is read from ROM.
+
+Decode
+
+Opcode and operands are extracted.
+
+Execute
+
+ALU performs operation.
+
+Memory
+
+LOAD and STORE access RAM.
+
+Write Back
+
+Results are written into destination registers.
+
+---
 
 FPGA Integration
 
-- Virtual FPGA board implementation
-- Switch input support
-- LED output display
-- Clock control interface
+The final project includes FPGA-style visualization.
+
+Supported Components
+
+- Virtual Switches
+- Virtual LEDs
+- Register Monitoring
+- Live Execution Display
+
+Switches can be mapped to CPU inputs and LEDs can display register outputs and execution states.
 
 ---
 
-Technology Stack
+Base44 Simulator Features
+
+The web simulator provides:
+
+- Instruction Execution
+- Register Visualization
+- Memory Viewer
+- RAM Monitoring
+- ROM Monitoring
+- ALU Output Tracking
+- Pipeline Observation
+- Flag Visualization
+- FPGA Switch Simulation
+- LED Output Monitoring
+
+---
+
+Technologies Used
+
+Hardware
 
 - Logisim Evolution
-- CPU Design and Simulation
-- Custom ISA Development
-- Virtual Machine Concepts
-- FPGA-Based Hardware Mapping
-- Assembly Programming
+
+Software
+
+- Base44
+- JavaScript
+- HTML
+- CSS
+
+Concepts
+
+- Computer Architecture
+- CPU Design
+- Instruction Set Architecture
+- Memory Systems
+- FPGA Concepts
+- Digital Logic Design
 
 ---
 
-Project Structure
+Learning Outcomes
 
-CPU Core
-├── Program Counter
-├── Register File
-├── ALU
-├── Control Unit
-├── RAM
-└── Stack
+Through this project:
 
-Simulation Layer
-├── Instruction Execution
-├── Debugging
-├── Visualization
-└── Performance Tracking
-
-Hardware Layer
-├── FPGA Virtual Board
-├── Switch Inputs
-└── LED Outputs
+- Designed a complete CPU from scratch
+- Implemented a custom ISA
+- Built a register file architecture
+- Integrated RAM and ROM systems
+- Developed execution visualization tools
+- Simulated FPGA interactions
+- Understood processor datapath design
+- Explored instruction execution workflows
 
 ---
 
-Mid Project Status
+Future Enhancements
 
-Completed:
-
-- CPU architecture design
-- Register file implementation
-- ALU implementation
-- Memory integration
-- ISA design
-- Execution framework
-- Virtual FPGA board
-
-In Progress:
-
-- Advanced VM support
-- AI-assisted code generation improvements
-- Complete ISA example generation
-- Enhanced FPGA interaction
-- Performance analytics dashboard
-
----
-
-Future Enhancements (Final Project)
-
-- Complete VM-to-Assembly translator
-- Improved AI code generation
-- Advanced debugging tools
-- Real FPGA deployment support
-- Performance comparison system
-- Enhanced visualization features
-- Complete ISA testing suite
-
----
-
-Educational Purpose
-
-This project is developed as part of a Computer Architecture and System Design learning initiative to understand processor internals, instruction execution, memory management, assembly language, virtual machines, and FPGA-based hardware interaction.
+- Pipelined CPU Design
+- Cache Memory
+- Interrupt Handling
+- Advanced Branch Prediction
+- FPGA Hardware Deployment
+- Assembly Compiler
+- VM Translation Support
+- Performance Analysis Tools
 
 ---
 
 Author
 
-Pittu.Harsha Vardhan Reddy
+Pittu.Harsha vardhan Reddy
 
-B.Tech AI & Data Science (Cyber Physical Systems & Security)
+B.Tech Artificial Intelligence & Data Science
+Cyber Physical Systems & Security
 
-Amrita Vishwa Vidyapeetham, Coimbatore
+---
+
+Project Status
+
+Mid Project: Completed
+
+Final Project: Active Development and Enhancement done
